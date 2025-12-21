@@ -1,9 +1,22 @@
-<h1> Главная страница со всеми постами <h1>
-<% @post.each do |post| %>
+<h1>Все посты</h1>
+
+<% if @post && @post.any? %>
+  <% @post.each do |post| %>
     <div class="alert alert-light">  
-        <h3> <%= post.title %> </h3>
-        <p class="fs-6"><%= post.body %></p>
-        <%= link_to "Читать далее...", post_path(post), :class=> 'btn btn-outline-primary' %>
+      <h3><%= post.title %></h3>
+      
+      <div class="post-preview fs-6 mb-3">
+        <%= simple_format(truncate(post.body, length: 200, separator: ' ', omission: '...')) %>
+      </div>
+      
+      <%= link_to "Читать далее...", post_path(post), class: 'btn btn-outline-primary' %>
     </div>
     <br>
+  <% end %>
+<% else %>
+  <div class="alert alert-info text-center">
+    <h4>Пока нет ни одного рецепта</h4>
+    <p>Станьте первым, кто поделится рецептом!</p>
+    <%= link_to "Создать первый рецепт", new_post_path, class: "btn btn-primary" %>
+  </div>
 <% end %>
