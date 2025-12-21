@@ -1,1 +1,9 @@
-<h3> Главная страница <h3>
+<h1> Главная страница со всеми постами <h1>
+<% @post.each do |post| %>
+    <div class="alert alert-light">  
+        <h3> <%= post.title %> </h3>
+        <p class="fs-6"><%= post.body %></p>
+        <%= link_to "Читать далее...", post_path(post), :class=> 'btn btn-outline-primary' %>
+    </div>
+    <br>
+<% end %>
