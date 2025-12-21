@@ -1,47 +1,108 @@
-<h1><%= @post.title %></h1>
-<div class="post-content">
-  <%= simple_format(@post.body) %>
-</div>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title"><%= @post.title %></h1>
+      
 
-<hr>
-<div class="d-flex gap-2">
-  <%= link_to "Редактировать", edit_post_path(@post), class: 'btn btn-warning' %>
-  <%= button_to "Удалить", post_path(@post), 
-      method: :delete, 
-      form: { data: { turbo_confirm: "Хотите удалить статью?" } }, 
-      class: 'btn btn-danger' %>
-</div>
+      <div class="mb-3 text-muted">
+        <small>
+          Автор: 
+          <% if @post.user %>
+            <%= @post.user.name.present? ? @post.user.name : @post.user.email %>
+          <% else %>
+            Неизвестный автор
+          <% end %>
+          | 
+          <%= l(@post.created_at, format: :long) %>
+        </small>
+      </div>
+      
+      <div class="card-text">
+        <%= simple_format(@post.body) %>
+      </div>
+      
 
-<hr>
-<h2>Все комментарии</h2>
-<% @post.comments.each do |comment| %>
-    <div class="alert alert-light">  
-        <div class="d-flex justify-content-between">
-            <div>
-                <p class="mb-1"><strong><%= comment.username %></strong></p>
-                <p class="mb-0"><%= comment.body %></p>
-            </div>
-            <%= button_to "Удалить", post_comment_path(@post, comment), 
-                method: :delete, 
-                form: { data: { turbo_confirm: "Удалить комментарий?" }, class: 'd-inline' }, 
-                class: 'btn btn-sm btn-outline-danger align-self-start' %>
+      <% if user_signed_in? && @post.user == current_user %>
+        <div class="mt-4 d-flex gap-2">
+          <%= link_to "Редактировать", edit_post_path(@post), class: 'btn btn-warning' %>
+          <%= button_to "Удалить", post_path(@post), 
+              method: :delete, 
+              form: { data: { turbo_confirm: "Хотите удалить статью?" } }, 
+              class: 'btn btn-danger' %>
         </div>
+      <% end %>
     </div>
-<% end %>
+  </div>
 
-<h2>Добавление комментария</h2>
-<%= form_for([@post, @post.comments.build], data: { turbo: false }) do |f| %>
-    <div class="mb-3">
-        <%= f.label :username, "Пользователь", class: "form-label" %><br>
-        <%= f.text_field :username, class: "form-control" %>
-    </div>
+  <hr class="my-4">
 
-    <div class="mb-3">
-        <%= f.label :body, "Текст комментария", class: "form-label" %><br>
-        <%= f.text_area :body, class: "form-control", rows: 3 %>
-    </div>
 
-    <div class="mb-3">
-        <%= f.submit "Добавить", class: "btn btn-warning" %>
-    </div>
-<% end %>
+  <div class="mt-4">
+    <h2>Все комментарии</h2>
+    
+    <% if @post.comments.any? %>
+      <% @post.comments.each do |comment| %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <div class="flex-grow-1">
+                <div class="d-flex align-items-center mb-2">
+                  <strong class="me-2">
+
+                    <% if comment.user %>
+                      <%= comment.user.name.present? ? comment.user.name : comment.user.email %>
+                    <% else %>
+                      <%= comment.username.present? ? comment.username : "Аноним" %>
+                    <% end %>
+                  </strong>
+                  <small class="text-muted">
+                    <%= l(comment.created_at, format: :short) %>
+                  </small>
+                </div>
+                <p class="mb-0"><%= comment.body %></p>
+              </div>
+              
+             
+              <% if user_signed_in? && (comment.user == current_user || @post.user == current_user) %>
+                <%= button_to "Удалить", post_comment_path(@post, comment), 
+                    method: :delete, 
+                    form: { data: { turbo_confirm: "Удалить комментарий?" }, class: 'd-inline' }, 
+                    class: 'btn btn-sm btn-outline-danger' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="alert alert-info">
+        Пока нет комментариев. Будьте первым!
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class="mt-4">
+    <h2>Добавление комментария</h2>
+    
+    <% if user_signed_in? %>
+      <%= form_for([@post, @post.comments.build], data: { turbo: false }) do |f| %>
+
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        
+        <div class="mb-3">
+          <%= f.label :body, "Текст комментария", class: "form-label" %><br>
+          <%= f.text_area :body, class: "form-control", rows: 3, required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.submit "Добавить", class: "btn btn-warning" %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="alert alert-info">
+        <%= link_to "Войдите", new_user_session_path, class: "btn btn-primary btn-sm me-2" %>
+        чтобы оставить комментарий
+      </div>
+    <% end %>
+  </div>
+</div>

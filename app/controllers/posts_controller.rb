@@ -1,8 +1,7 @@
 class PostsController < ApplicationController
-    http_basic_authenticate_with name: "admin", password: "123", 
-    except: [:index, :show]
+    before_action :authenticate_user!, except: [:index, :show]
 
-    
+
     #Обработка главной страницы
     def index 
         @post = Post.all 
@@ -24,7 +23,7 @@ class PostsController < ApplicationController
     def update
         @post = Post.find(params[:id])
         if(@post.update(post_params))
-            redirect_to @post
+            redirect_to @post, notice: "Рецепт успешно обновлен!" 
         else
             render 'edit'
         end
@@ -33,16 +32,14 @@ class PostsController < ApplicationController
     def destroy
         @post = Post.find(params[:id])
         @post.destroy
-        redirect_to posts_path
+        redirect_to posts_path, notice: "Рецепт удален!" 
     end
 
     #Создание нового поста
     def create 
-        #render plain: params[:post].inspect
-
-        @post = Post.new(post_params)
+        @post = current_user.posts.new(post_params)
         if(@post.save)
-            redirect_to @post
+            redirect_to @post, notice: "Рецепт успешно создан!"
         else
             render 'new'
         end

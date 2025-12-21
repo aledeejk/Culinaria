@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">Вход в систему</h2>
+      
+      <!-- Используем полный URL с url вместо path -->
+      <%= form_for(resource, as: resource_name, 
+                   url: session_url(resource_name)) do |f| %>
+        
+        <div class="mb-3">
+          <%= f.label :email, "Email", class: 'form-label' %>
+          <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :password, "Пароль", class: 'form-label' %>
+          <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="mb-3">
+            <%= f.check_box :remember_me, class: 'form-check-input' %>
+            <%= f.label :remember_me, "Запомнить меня", class: 'form-check-label' %>
+          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= f.submit "Войти", class: 'btn btn-primary w-100' %>
+        </div>
+      <% end %>
+
+      <div class="text-center mt-3">
+        <p>Нет аккаунта? 
+          <!-- Используем полный URL -->
+          <%= link_to "Зарегистрироваться", new_user_registration_url %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
