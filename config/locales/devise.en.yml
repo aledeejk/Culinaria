@@ -1,65 +1,63 @@
-# Additional translations at https://github.com/heartcombo/devise/wiki/I18n
-
-en:
+ru:
   devise:
     confirmations:
-      confirmed: "Your email address has been successfully confirmed."
-      send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
-      send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
+      confirmed: "Ваш email адрес успешно подтвержден."
+      send_instructions: "В течение нескольких минут вы получите письмо с инструкциями по подтверждению вашего адреса email."
+      send_paranoid_instructions: "Если ваш email адрес существует в нашей базе данных, то в течение нескольких минут вы получите письмо с инструкциями по подтверждению вашего адреса email."
     failure:
-      already_authenticated: "You are already signed in."
-      inactive: "Your account is not activated yet."
-      invalid: "Invalid %{authentication_keys} or password."
-      locked: "Your account is locked."
-      last_attempt: "You have one more attempt before your account is locked."
-      not_found_in_database: "Invalid %{authentication_keys} or password."
-      timeout: "Your session expired. Please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
-      unconfirmed: "You have to confirm your email address before continuing."
+      already_authenticated: "Вы уже вошли в систему."
+      inactive: "Ваш аккаунт еще не активирован."
+      invalid: "Неверный email или пароль."
+      locked: "Ваш аккаунт заблокирован."
+      last_attempt: "У вас осталась еще одна попытка ввода пароля до блокировки аккаунта."
+      not_found_in_database: "Неверный email или пароль."
+      timeout: "Ваша сессия истекла. Пожалуйста, войдите снова, чтобы продолжить."
+      unauthenticated: "Для продолжения работы необходимо войти в систему."
+      unconfirmed: "Вы должны подтвердить свой аккаунт перед тем как продолжить."
     mailer:
       confirmation_instructions:
-        subject: "Confirmation instructions"
+        subject: "Инструкции по подтверждению"
       reset_password_instructions:
-        subject: "Reset password instructions"
+        subject: "Инструкции по восстановлению пароля"
       unlock_instructions:
-        subject: "Unlock instructions"
+        subject: "Инструкции по разблокировке аккаунта"
       email_changed:
-        subject: "Email Changed"
+        subject: "Email был изменен"
       password_change:
-        subject: "Password Changed"
+        subject: "Пароль был изменен"
     omniauth_callbacks:
-      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
-      success: "Successfully authenticated from %{kind} account."
+      failure: "Не удалось авторизоваться с помощью %{kind}, потому что \"%{reason}\"."
+      success: "Успешно авторизован с помощью %{kind}."
     passwords:
-      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
-      send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
-      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
-      updated: "Your password has been changed successfully. You are now signed in."
-      updated_not_active: "Your password has been changed successfully."
+      no_token: "Эта страница доступна только при переходе по ссылке из письма о сбросе пароля."
+      send_instructions: "В течение нескольких минут вы получите письмо с инструкциями по восстановлению вашего пароля."
+      send_paranoid_instructions: "Если ваш email адрес существует в нашей базе данных, то в течение нескольких минут вы получите письмо с инструкциями по восстановлению вашего пароля."
+      updated: "Ваш пароль успешно изменен. Теперь вы вошли в систему."
+      updated_not_active: "Ваш пароль успешно изменен."
     registrations:
-      destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
-      signed_up: "Welcome! You have signed up successfully."
-      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
-      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
-      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
-      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirmation link to confirm your new email address."
-      updated: "Your account has been updated successfully."
-      updated_but_not_signed_in: "Your account has been updated successfully, but since your password was changed, you need to sign in again."
+      destroyed: "До свидания! Ваш аккаунт был успешно удален. Надеемся увидеть вас снова в ближайшее время."
+      signed_up: "Добро пожаловать! Вы успешно зарегистрировались."
+      signed_up_but_inactive: "Вы успешно зарегистрировались. Однако, вы не можете войти, потому что ваш аккаунт еще не активирован."
+      signed_up_but_locked: "Вы успешно зарегистрировались. Однако, вы не можете войти, потому что ваш аккаунт заблокирован."
+      signed_up_but_unconfirmed: "В течение нескольких минут вы получите письмо с инструкциями по подтверждению вашего адреса email."
+      update_needs_confirmation: "Вы успешно обновили свой аккаунт, но нам нужно подтвердить ваш новый адрес email. Проверьте свою почту и перейдите по ссылке для подтверждения."
+      updated: "Ваш аккаунт успешно обновлен."
+      updated_but_not_signed_in: "Ваш аккаунт успешно обновлен, но нам нужно подтвердить ваш новый адрес email. Проверьте свою почту и перейдите по ссылке для подтверждения."
     sessions:
-      signed_in: "Signed in successfully."
-      signed_out: "Signed out successfully."
-      already_signed_out: "Signed out successfully."
+      signed_in: "Успешный вход в систему."
+      signed_out: "Успешный выход из системы."
+      already_signed_out: "Успешный выход из системы."
     unlocks:
-      send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
-      send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
-      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+      send_instructions: "В течение нескольких минут вы получите письмо с инструкциями по разблокировке вашего аккаунта."
+      send_paranoid_instructions: "Если ваш аккаунт существует, то в течение нескольких минут вы получите письмо с инструкциями по разблокировке вашего аккаунта."
+      unlocked: "Ваш аккаунт разблокирован. Теперь вы можете войти в систему."
   errors:
     messages:
-      already_confirmed: "was already confirmed, please try signing in"
-      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
-      expired: "has expired, please request a new one"
-      not_found: "not found"
-      not_locked: "was not locked"
+      already_confirmed: "уже подтвержден, пожалуйста попробуйте войти"
+      confirmation_period_expired: "должен быть подтвержден в течение %{period}, пожалуйста запросите новый"
+      expired: "истек, пожалуйста запросите новый"
+      not_found: "не найден"
+      not_locked: "не был заблокирован"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "%{resource}: сохранение не удалось из-за %{count} ошибки"
+        other: "%{resource}: сохранение не удалось из-за %{count} ошибок"

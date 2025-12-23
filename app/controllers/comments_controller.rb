@@ -27,7 +27,7 @@ end
     @comment = @post.comments.find(params[:id])
     if user_signed_in? && (@comment.user == current_user || @post.user == current_user)
       @comment.update(body: "Комментарий удален!")
-      redirect_to @post, notice: "1 уведомление"
+      redirect_to @post, notice: "Комментарий удален"
     else
       redirect_to @post, alert: "Вы не можете удалить этот комментарий!"
     end
