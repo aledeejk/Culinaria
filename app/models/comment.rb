@@ -4,6 +4,7 @@ class Comment < ActiveRecord::Base
   
   validates :body, presence: true
   
+  
   def display_name
     if user.present?
       user.name.present? ? user.name : user.email
