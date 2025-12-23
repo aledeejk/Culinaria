@@ -22,6 +22,7 @@ class CommentsController < ApplicationController
   end
 end
   
+
   def destroy
     @comment = @post.comments.find(params[:id])
     if user_signed_in? && (@comment.user == current_user || @post.user == current_user)
