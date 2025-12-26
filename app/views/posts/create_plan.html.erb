@@ -1,0 +1,44 @@
+<h2>Добавление нового рациона питания</h2>
+
+<%= form_for :post, url: posts_path, data: { turbo: false } do |f| %>
+
+    <% if @post && @post.errors.any?%>
+        <% @post.errors.full_messages.each do |msg| %>
+            <div class="alert alert-danger"> <%= msg %> </div>
+        <% end %>
+    <% end %>
+
+    <p>
+        Название рациона<br>
+        <%= f.text_field(:title, {
+            :class => 'form-control',
+            :placeholder => 'Например: Мой недельный рацион'
+        }) %>
+    </p>
+
+    <p>
+        Описание рациона<br>
+        <%= f.text_area(:body, {
+            :class => 'form-control',
+            :rows => 15,
+            :style => 'resize: none; height: 400px;',
+            :placeholder => "Опишите ваш рацион по дням...
+            
+Пример:
+Понедельник:
+- Завтрак: Овсянка с ягодами
+- Обед: Курица с гречкой
+- Ужин: Рыба с овощами
+
+Вторник:
+- Завтрак: Творог
+- Обед: Суп
+- Ужин: Салат"
+        }) %>
+    </p>
+
+    <p>
+        <%= f.submit "Сохранить рацион", class: 'btn btn-success' %>
+        <%= link_to "Отмена", posts_path, class: 'btn btn-outline-secondary' %>
+    </p>
+<% end %>

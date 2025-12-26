@@ -1,18 +1,18 @@
 class PostsController < ApplicationController
-    before_action :authenticate_user!, except: [:index, :show]
+    before_action :authenticate_user!, except: [ :index, :show ]
 
 
-    #Обработка главной страницы
-    def index 
-        @post = Post.all 
+    # Обработка главной страницы
+    def index
+        @post = Post.all
     end
 
-    #Добавление нового поста
+    # Добавление нового поста
     def new
         @post = Post.new
     end
 
-    def show 
+    def show
         @post = Post.find(params[:id])
         @comments = @post.comments.order(created_at: :desc)
     end
@@ -20,33 +20,36 @@ class PostsController < ApplicationController
     def edit
         @post = Post.find(params[:id])
     end
-    
+
     def update
         @post = Post.find(params[:id])
-        if(@post.update(post_params))
-            redirect_to @post, notice: "Рецепт успешно обновлен!" 
+        if @post.update(post_params)
+            redirect_to @post, notice: "Рецепт успешно обновлен!"
         else
-            render 'edit'
+            render "edit"
         end
     end
 
     def destroy
         @post = Post.find(params[:id])
         @post.destroy
-        redirect_to posts_path, notice: "Рецепт удален!" 
+        redirect_to posts_path, notice: "Пост удален!"
     end
 
-    #Создание нового поста
-    def create 
+    # Создание нового поста
+    def create
         @post = current_user.posts.new(post_params)
-        if(@post.save)
-            redirect_to @post, notice: "Рецепт успешно создан!"
+        if @post.save
+            redirect_to @post, notice: "Пост успешно опубликован!"
         else
-            render 'new'
+            render "new"
         end
     end
 
     private def post_params
         params.require(:post).permit(:title, :body)
     end
+  def create_plan
+    @post = Post.new
+  end
 end
